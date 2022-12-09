@@ -32,25 +32,12 @@ def scenic_score(x: int, y: int) -> int:
     points_right = [(x, y) for x in range(x + 1, len(grid))]
 
     ans = [0, 0, 0, 0]
-    for point in points_above:
-        ans[0] += 1
-        if grid[point[0]][point[1]] >= grid[x][y]:
-            break
 
-    for point in points_below:
-        ans[1] += 1
-        if grid[point[0]][point[1]] >= grid[x][y]:
-            break
-
-    for point in points_left:
-        ans[2] += 1
-        if grid[point[0]][point[1]] >= grid[x][y]:
-            break
-
-    for point in points_right:
-        ans[3] += 1
-        if grid[point[0]][point[1]] >= grid[x][y]:
-            break
+    for idx, points in enumerate([points_above, points_below, points_left, points_right]):
+        for point in points:
+            ans[idx] += 1
+            if grid[point[0]][point[1]] >= grid[x][y]:
+                break
 
     return prod(ans)
 
